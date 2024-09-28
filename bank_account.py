@@ -26,10 +26,11 @@ class BankAccount:
             self.balance += deposit_money
             return f"{self.owner} just deposited {deposit_money}, balance updated:{self.balance}."
 
-        except TypeError:
+        except ValueError:
             return "Please enter valid number."
 
     def withdraw(self, withdraw_money: int):
+        
         try:
             withdraw_money = int(withdraw_money)
             if self.balance - withdraw_money < self.limit_minus:
@@ -42,15 +43,10 @@ class BankAccount:
                 self.balance -= withdraw_money
                 return f"Withdraw successfully, {self.owner} current balance is:{self.balance}"
 
-        except TypeError:
+        except ValueError:
             return "Please enter valid number."
 
     def transfer_money(self, account_to_transfer, transfer_money: int):
-        try:
-            if not isinstance(account_to_transfer, BankAccount):
-                return "Please Enter Valid BankAccount"
-        except NameError:
-            return "Please enter valid BankAccount."
 
         try:
             if self.account_id == account_to_transfer.account_id:
@@ -68,7 +64,7 @@ class BankAccount:
                 account_to_transfer.balance += transfer_money
                 return f"Transfer successfully {transfer_money} to {account_to_transfer.owner}"
 
-        except TypeError:
+        except ValueError:
             return "Please enter valid number."
 
     def show_account(self):
